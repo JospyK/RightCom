@@ -11,6 +11,8 @@
 
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/dashboard.css" rel="stylesheet">
+    <link href="assets/css/spinner.anim.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
     <script src="assets/js/angular.min.js"></script>
     <script src="assets/js/app.js"></script>
@@ -46,7 +48,7 @@
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <a class="btn btn-sm btn-outline-secondary" href="#" onClick ="$('#table').tableExport({type:'excel',escape:'false'});">Export to XLS</a>
-                <a class="btn btn-sm btn-outline-secondary" href="#" target="_blank" onClick ="$('#table').tableExport({type:'pdf', pdfFontSize:'7', ignoreColumn: [4], pdfLeftMargin:10, escape:'false'});">Export to PDF</a>
+                <a class="btn btn-sm btn-outline-secondary" href="#" onClick ="$('#table').tableExport({type:'pdf', pdfFontSize:'7', ignoreColumn: [4], pdfLeftMargin:10, escape:'false'});">Export to PDF</a>
 
 
               </div>
@@ -83,7 +85,7 @@
               </thead>
               <tbody>
                   <tr ng-repeat="log in logs | filter:search  | orderBy: 'timestamp':true | orderBy:sortType:sortReverse | filter:searchLog">
-                    <td class="{{log.level}}" width="100px;">{{log.level}}</td>
+                    <td class="{{log.level}}">{{log.level}}</td>
                     <td class="{{log.level}}">{{log.message}}</td>
                     <td class="{{log.level}}">{{log.timestamp}}</td>
                   </tr>
@@ -94,6 +96,7 @@
       </div>
     </div>
 
+    <div class="signal"></div>
     <script src="assets/js/jquery-slim.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

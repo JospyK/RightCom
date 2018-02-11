@@ -11,8 +11,8 @@ app.controller('mainController', function($scope, $http) {
 	    method : "GET",
 	    url : "http://localhost:5000/api"
 	}).then(function mySuccess(response) {
+	    $('div.signal').removeClass('signal');
 	    $scope.logs = response.data;
-	    console.log(response.data);
 	}, function myError(response) {
 	    $scope.logs = response.statusText;
 	});
