@@ -9,7 +9,7 @@ app.controller('mainController', function($scope, $http) {
 
 	$http({
 	    method : "GET",
-	    url : "http://localhost:5000/api"
+	    url : "http://localhost:5000"
 	}).then(function mySuccess(response) {
 	    $('div.signal').removeClass('signal');
 	    $scope.logs = response.data;
