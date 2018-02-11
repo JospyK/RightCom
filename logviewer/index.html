@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" ng-app="logApp">
+  
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Xlab log Viewer</title>
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/dashboard.css" rel="stylesheet">
+
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  </head>
+
+  <body ng-controller="mainController">
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center" style="letter-spacing: 1px;" href="#"><b>RightCom</b></a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" ng-model="searchLog">
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Dashboard</span>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Log Viewer
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+  
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Xlab Log Viewer</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <a class="btn btn-sm btn-outline-secondary" href="#" onClick ="$('#table').tableExport({type:'excel',escape:'false'});">Export to XLS</a>
+                <a class="btn btn-sm btn-outline-secondary" href="#" target="_blank" onClick ="$('#table').tableExport({type:'pdf', pdfFontSize:'7', ignoreColumn: [4], pdfLeftMargin:10, escape:'false'});">Export to PDF</a>
+
+
+              </div>
+            </div>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="table table-sm export-table" id="table">
+              <thead>
+                <tr>
+                  <th>
+                    <a href="#" ng-click="sortType = 'level'; sortReverse = !sortReverse">
+                      Level
+                      <span ng-show="sortType == 'level' && !sortReverse" class="fa fa-caret-down"></span>
+                      <span ng-show="sortType == 'level' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                  </th>
+                  <th>
+                    <a href="#" ng-click="sortType = 'message'; sortReverse = !sortReverse">
+                      Message
+                      <span ng-show="sortType == 'message' && !sortReverse" class="fa fa-caret-down"></span>
+                      <span ng-show="sortType == 'message' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                  </th>
+                  <th>
+                    <a href="#" ng-click="sortType = 'timestamp'; sortReverse = !sortReverse">
+                      Timestamp
+                      <span ng-show="sortType == 'timestamp' && !sortReverse" class="fa fa-caret-down"></span>
+                      <span ng-show="sortType == 'timestamp' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                    <input id ="datetime" type="datetime" ng-model="search"/>
+
+                </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="log in logs | filter:search  | orderBy: 'timestamp':true | orderBy:sortType:sortReverse | filter:searchLog">
+                    <td class="{{log.level}}" width="100px;">{{log.level}}</td>
+                    <td class="{{log.level}}">{{log.message}}</td>
+                    <td class="{{log.level}}">{{log.timestamp}}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="assets/js/jquery-slim.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/feather.min.js"></script>
+    
+
+    <script type="application/javascript" src="assets/js/tableExport.js"></script>
+    <script type="application/javascript" src="assets/js/jquery.base64.js"></script>
+    <script type="application/javascript" src="assets/js/jspdf/libs/sprintf.js"></script>
+    <script type="application/javascript" src="assets/js/jspdf/jspdf.js"></script>
+    <script type="application/javascript" src="assets/js/jspdf/libs/base64.js"></script>
+
+    <script type="text/javascript"> feather.replace() </script>
+  </body>
+</html>
